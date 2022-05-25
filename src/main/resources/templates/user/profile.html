@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>个人中心</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/assets/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/assets/layui/css/public.css}" media="all">
+    <style>
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+    </style>
+</head>
+<body>
+<!--个人信息-->
+<div class="layui-container">
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header"><h3>基本信息</h3></div>
+        <div class="layui-card-body">
+            <!--基本信息-->
+            <div id="user-info" class="layui-field-box">
+                <div id="edit-btn" style="position: absolute;right: 16px;cursor: pointer"><a><h3> 编辑 </h3></a></div>
+                <table class="layui-table" lay-skin="nob">
+                    <colgroup>
+                        <col width="100">
+                        <col width="500">
+                    </colgroup>
+
+                    <tbody>
+                    <tr>
+                        <td>头像</td>
+                        <td><img style="width:92px;height:92px" th:src="${user.getIcon()}" alt=""></td>
+                    </tr>
+                    <tr>
+                        <td>网名</td>
+                        <td th:text="${user.getName()}"></td>
+                    </tr>
+                    <tr>
+                        <td>年龄</td>
+                        <td th:text="${user.getAge()}"></td>
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td th:text="${user.getGender()}"></td>
+                    </tr>
+                    <tr>
+                        <td>手机</td>
+                        <td th:text="${user.getPhone()}"></td>
+                    </tr>
+                    <tr>
+                        <td>注册时间</td>
+                        <td th:text="${user.getRegisterTime()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--编辑基本信息-->
+            <div id="edit-div" class="layui-field-box" style="display: none">
+                <div class="layui-form layuimini-form" style="margin: 20px;margin-top: 30px">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">头像</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="icon-btn">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
+                            <span class="layui-bg-red">上传后无需保存!!!</span>
+                            <div class="layui-upload-list">
+                                <img style="width:92px;height:92px" id="preview-icon">
+                            </div>
+                            <div style="width: 95px;">
+                                <div class="layui-progress layui-progress-big" lay-showpercent="yes" lay-filter="demo">
+                                    <div class="layui-progress-bar" lay-percent=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">网名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="name" th:value="${user.getName()}" lay-verify="name"
+                                   placeholder="请输入网名" class="layui-input" id="name">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">年龄</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="age" th:value="${user.getAge()}"
+                                   placeholder="请输入年龄" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="gender" value="保密" title="保密" checked>
+                            <input type="radio" name="gender" value="男" title="男">
+                            <input type="radio" name="gender" value="女" title="女">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="phone" th:value="${user.getPhone()}" lay-verify="phone"
+                                   placeholder="请输入手机号" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" style="margin-top: 20px">
+                        <div class="layui-input-block">
+                            <button id="cancel-btn" class="layui-btn layui-btn-radius layui-btn-sm layui-btn-normal">
+                                取消
+                            </button>
+                            <button class="layui-btn layui-btn-radius layui-btn-sm layui-btn-warm" lay-submit
+                                    id="saveBtn" lay-filter="saveBtn">保存
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header"><h3>账户信息</h3></div>
+        <div class="layui-card-body">
+            <!--账户信息-->
+            <div class="layui-field-box">
+                <table class="layui-table" lay-skin="nob">
+                    <colgroup>
+                        <col width="100">
+                        <col width="500">
+                        <col width="100">
+                    </colgroup>
+
+                    <tr>
+                        <td>绑定邮箱</td>
+                        <td th:text="${user.getEmail()}"></td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                        <td>**********</td>
+                        <td>
+                            <button class="layui-btn-sm layui-btn-primary layui-border-blue" style="cursor: pointer"
+                                    id="password-edit">修改
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button class="layui-btn-sm layui-btn-primary layui-border-red" style="cursor: pointer"
+                        id="logout">退出登录
+                </button>
+                <button class="layui-btn-sm layui-btn-primary layui-border-green" style="cursor: pointer"
+                        id="return">返回导航
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header"><h3>留言区</h3></div>
+        <div class="layui-card-body">
+            <!--留言-->
+            <div class="layui-field-box">
+                <div>
+                    <textarea id="comment" name="comment" placeholder="请输入你的留言......管理员会及时关注你的反馈^^"
+                              class="layui-textarea"></textarea>
+                    <div style="margin-top: 10px;">
+                        <button class="layui-btn layui-btn-radius layui-btn-primary" id="publishBtn">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/assets/layui/layui.js}" charset="utf-8"></script>
+<script th:inline="javascript" charset="utf-8">
+    layui.use(['form', 'layer', 'laydate','upload', 'element'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            upload = layui.upload,
+            element = layui.element,
+            $ = layui.$;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            data = data.field;
+            $.ajax({
+                url: "/user/profile/update",
+                data: JSON.stringify(data),
+                type: "put",
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json;charset=utf-8",
+                beforeSend: function () {
+                    layer.msg('保存中', {icon: 16, time: 1000});
+                },
+                success: function (data) {
+                    setTimeout(function () {
+                        if (data.code === 200) {
+                            layer.msg("个人信息修改成功", {
+                                icon: 6,
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            }, function () {
+                                window.location = '/user/profile';
+                            });
+                        } else {
+                            layer.msg("个人信息修改失败", {
+                                icon: 5,
+                                time: 1000
+                            }, function () {
+                                window.location = '/user/profile';
+                            });
+                        }
+                    }, 1000);
+                }
+            });
+            return false;
+        });
+
+        //头像上传
+        upload.render({
+            elem: '#icon-btn' //绑定元素
+            , url: '/user/upload/icon' //服务器上传接口
+            , data: {
+                uname: [[${user.getName()}]],
+            }
+            // ,auto: false //选择文件后不自动上传
+            // ,bindAction: '#saveBtn' //指向一个按钮触发上传
+            , accept: 'images' //上传时校验的文件类型为图片
+            , acceptMime: 'image/*' //打开文件选项框时，只显示图片文件
+            , field: 'mf' //文件域字段名
+            , size: 1024 //图片大小不超过1MB
+            , drag: false //不接受拖拽文件上传
+            , before: function (obj) {
+                //预读本地文件
+                obj.preview(function (index, file, result) {
+                    console.log(index);
+                    console.log(file);
+                    console.log(result);
+                    $('#preview-icon').attr('src', result);
+                });
+                element.progress('demo', '0%'); //进度条复位
+            }
+            , done: function (res) {
+                //上传完毕回调
+                if (res.code === 200) {
+                    layer.msg("图片上传成功", {
+                        icon: 6,
+                        time: 1000
+                    });
+                } else {
+                    layer.msg("图片上传失败", {
+                        icon: 5,
+                        time: 1000
+                    }, function () {
+                        window.location = '/user/profile'
+                    })
+                }
+            }
+            , error: function (res) {
+                layer.msg("图片上传失败", {
+                    icon: 5,
+                    time: 1000
+                }, function () {
+                    window.location = '/user/profile'
+                })
+            }
+            , progress: function (n, elem, e) {
+                element.progress('demo', n + '%'); //可配合 layui 进度条元素使用
+                if (n === 100) {
+                    layer.msg('上传完毕', {icon: 1});
+                }
+            }
+        });
+
+        //表单验证
+        form.verify({
+            name: function (value, item) {
+                if (value.trim() === "") {
+                    return "网名不能为空！";
+                }
+                let result = "";
+                $.ajax({
+                    url: "/user/profile/update/checkName?username=" + $("#name").val(),
+                    type: "get",
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.code === 500300) {
+                            result = data.msg;
+                        }
+                    }
+                });
+                return result;
+            },
+            phone: function (value, item) {
+                //手机不为空时才验证
+                if (value.trim() !== "") {
+                    if (!new RegExp("^1(3\\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\\d|9[0-35-9])\\d{8}$").test(value)) {
+                        return "请输入有效的手机号！";
+                    }
+                }
+            }
+        });
+
+        $('#user-info').mouseover(function () {
+            $('#edit-btn').show();
+        });
+        $('#user-info').mouseout(function () {
+            $('#edit-btn').hide();
+        });
+        $('#edit-btn').click(function () {
+            layer.load(0, {time: 1000});
+            setTimeout(function () {
+                $('#user-info').hide();
+                $('#edit-div').show();
+            }, 1000);
+        });
+        $('#cancel-btn').click(function () {
+            layer.load(0, {time: 1000});
+            setTimeout(function () {
+                $('#user-info').show();
+                $('#edit-div').hide();
+            }, 1000);
+        });
+        $('#password-edit').click(function () {
+            var index = layer.open({ //弹出层
+                title: '密码修改',
+                content: '<input type="text" placeholder="请输入新密码" autofocus="autofocus" id="newPwd">',
+                yes: function (index, layero) {
+                    // index:当前层索引
+                    // layero:当前层DOM对象
+                    $.ajax({
+                        url: "/user/profile/update/pwd?newPwd=" + $("#newPwd").val(),
+                        type: "put",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.code === 200) {
+                                layer.msg("密码修改成功！", {
+                                    icon: 6,
+                                    time: 1000
+                                })
+                            } else {
+                                layer.msg("密码长度应该为6~20", {
+                                    icon: 5,
+                                    time: 1000
+                                })
+                            }
+                        }
+                    });
+                    layer.close(index);
+                }
+            });
+        });
+        $('#logout').click(function () {
+            layer.load(0, {time: 500});
+            setTimeout(function () {
+                layer.msg("欢迎下次访问！", {
+                    icon: 6,
+                    time: 1000
+                })
+            }, 500);
+            setTimeout("window.location='/user/doLogout'", 1500);
+        });
+        $('#return').click(function () {
+            layer.load(0, {time: 1000});
+            setTimeout("window.location='/navigation'", 1000);
+        });
+        $('#publishBtn').click(function () {
+            layer.msg("提交中", {
+                icon: 16,
+                time: 500
+            });
+            setTimeout(function () {
+                let comment = $('#comment').val();
+                if (comment === '') {
+                    layer.msg("留言不能为空！", {
+                        icon: 7,
+                        time: 1000
+                    })
+                } else {
+                    layer.msg("管理员会及时关注您的留言，感谢您对我们系统的支持^^", {
+                        icon: 6,
+                        time: 1000
+                    }, function () {
+                        $.ajax({
+                            url: '/user/comment',
+                            type: 'post',
+                            contentType: "application/json;charset=utf-8",
+                            data: JSON.stringify({
+                                'comment': comment
+                            })
+                        })
+                    })
+                }
+            }, 500);
+        });
+
+    });
+
+
+    // layui.use(['upload', 'element', 'layer'], function () {
+    //     var upload = layui.upload
+    //         , element = layui.element
+    //         , layer = layui.layer
+    //         , $ = layui.$;
+    //
+    // });
+
+
+    // layui.use('form', function () {
+    //     const form = layui.form, $ = layui.$;
+    //
+    // });
+
+</script>
+</body>
+</html>

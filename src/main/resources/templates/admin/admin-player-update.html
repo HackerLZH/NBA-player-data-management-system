@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>admin</title>
+    <link rel="stylesheet" th:href="@{/assets/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/assets/layui/css/public.css}" media="all">
+    <script th:src="@{/assets/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/assets/mine/js/admin-player-update.js}" charset="utf-8"></script>
+</head>
+<body>
+<!--资料管理-->
+<div class="layui-container">
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header">
+            <h3>资料管理</h3>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">球员名</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getName()}" name="name" lay-verify="required" placeholder="请输入球员名" autocomplete="off" class="layui-input" disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年龄</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getAge()}" name="age" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">生日</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getBirthday()}" name="birthday" id="birthday" lay-verify="required|date" placeholder="请选择" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生地</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getBirthPlace()}" name="birth_place" lay-verify="required" placeholder="请输入地名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">效力球队</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="team" th:value="${player.getTeam()}" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选秀时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getEnterTime()}" name="enter_time" id="enter_time" lay-verify="required|number" placeholder="请选择" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">打球时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getPlayedTime()}" name="played_time" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否退役？</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="retired" th:value="${player.getRetired()}" lay-verify="required">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">得分</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getScore()}" name="score" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">篮板</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getRebound()}" name="rebound" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">助攻</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getAssist()}" name="assist" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">抢断</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getSteal()}" name="steal" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">盖帽</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="${player.getBlock()}" name="block" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="saveBtn">保存</button>
+                        <button type="button" id="return" class="layui-btn layui-btn-primary layui-border-blue">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

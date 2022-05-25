@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>admin</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/assets/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/assets/layui/css/public.css}" media="all">
+    <script th:src="@{/assets/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/assets/mine/js/admin-player-add.js}" charset="utf-8"></script>
+</head>
+<body>
+<!--资料管理-->
+<div class="layui-container">
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header">
+            <h3>资料管理</h3>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">球员名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" lay-verify="required" placeholder="请输入球员名" autocomplete="off" autofocus="autofocus" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">生日</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="birthday" id="birthday" lay-verify="required|date" placeholder="请选择" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出生地</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="birth_place" lay-verify="required" placeholder="请输入地名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">效力球队</label>
+                    <div class="layui-input-block">
+                        <select name="team" lay-verify="required">
+                            <option value=""></option>
+                            <option value="热火">热火</option>
+                            <option value="雄鹿">雄鹿</option>
+                            <option value="凯尔特人">凯尔特人</option>
+                            <option value="76人">76人</option>
+                            <option value="猛龙">猛龙</option>
+                            <option value="公牛">公牛</option>
+                            <option value="篮网">篮网</option>
+                            <option value="骑士">骑士</option>
+                            <option value="老鹰">老鹰</option>
+                            <option value="黄蜂">黄蜂</option>
+                            <option value="尼克斯">尼克斯</option>
+                            <option value="奇才">奇才</option>
+                            <option value="步行者">步行者</option>
+                            <option value="活塞">活塞</option>
+                            <option value="魔术">魔术</option>
+                            <option value="太阳">太阳</option>
+                            <option value="灰熊">灰熊</option>
+                            <option value="勇士">勇士</option>
+                            <option value="独行侠">独行侠</option>
+                            <option value="爵士">爵士</option>
+                            <option value="掘金">掘金</option>
+                            <option value="森林狼">森林狼</option>
+                            <option value="快船">快船</option>
+                            <option value="鹈鹕">鹈鹕</option>
+                            <option value="马刺">马刺</option>
+                            <option value="湖人">湖人</option>
+                            <option value="国王">国王</option>
+                            <option value="开拓者">开拓者</option>
+                            <option value="雷霆">雷霆</option>
+                            <option value="火箭">火箭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选秀时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="enter_time" id="enter_time" lay-verify="required|number" placeholder="请选择" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">打球时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="played_time" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否退役？</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="retired" value="是" title="是">
+                        <input type="radio" name="retired" value="否" title="否" checked>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">得分</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="score" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">篮板</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="rebound" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">助攻</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="assist" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">抢断</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="steal" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">盖帽</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="block" lay-verify="required|number" placeholder="请输入数字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="addBtn">添加</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        <button type="button" id="return" class="layui-btn layui-btn-primary layui-border-blue">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

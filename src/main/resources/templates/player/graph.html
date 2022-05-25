@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data Graph</title>
+    <link rel="stylesheet" th:href="@{/assets/layui/css/layui.css}" media="all">
+    <style>
+        .div-inline{
+            display: inline-block;
+        }
+
+        /* 轮播图效果 */
+        div[carousel-item]>*{font-size: 64px; text-align: center; line-height: 280px; color: #fff;}
+        div[carousel-item]>*:nth-child(2n){background-color: #009688;}
+        div[carousel-item]>*:nth-child(2n+1){background-color: #5FB878;}
+    </style>
+    <script th:src="@{/assets/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/assets/echarts.js}" charset="utf-8"></script>
+</head>
+<body>
+<div class="layui-container">
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div class="layui-card-header div-inline"><h3>Data Graph</h3></div>
+        <button style="float: right;" type="button" id="return" class="layui-btn layui-btn-primary layui-border-blue">返回</button>
+        <button style="float: right; display: none;" class="layui-btn" id="foward">前进</button>
+        <div class="layui-card-body">
+            <!--轮播图-->
+            <div class="layui-carousel" id="carousel">
+                <div carousel-item>
+                    <div id="carousel1">得分前十堆叠折线图</div>
+                    <div id="carousel2">打球时间分区人数图</div>
+<!--                    <div>条目3</div>-->
+<!--                    <div>条目4</div>-->
+<!--                    <div>条目5</div>-->
+                </div>
+            </div>
+            <div id="graph1" style="display: none;"></div>
+            <div id="graph2" style="display: none;"></div>
+        </div>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    layui.use(['carousel', 'layer'], function(){
+        let $ = layui.$, carousel = layui.carousel;
+        //返回导航
+        $("#return").click(function(){
+            layer.load(0, {time: 1000});
+            setTimeout("window.location = \"/navigation\"", 1000);
+        });
+
+        //轮播图
+        carousel.render({
+            elem: '#carousel',
+            width: '100%',
+            height: '400px',
+            arrow: 'always',
+        });
+
+        $("#carousel1").click(function(){
+            layer.load(0, {time: 1000});
+            setTimeout(function(){
+                $("#carousel").hide();
+                $("#return").hide();
+                $("#graph1").show();
+                $('#foward').show();
+            }, 1000);
+        });
+        $("#carousel2").click(function(){
+            layer.load(0, {time: 1000});
+            setTimeout(function(){
+                $("#carousel").hide();
+                $("#return").hide();
+                $("#graph2").show();
+                $('#foward').show();
+            }, 1000);
+        });
+
+        $("#foward").click(function(){
+            layer.load(0, {time: 1000});
+            setTimeout(function(){
+                $("#graph1").hide();
+                $("#graph2").hide();
+                $('#foward').hide();
+                $("#carousel").show();
+                $("#return").show();
+            }, 1000);
+        });
+        //设置图表宽高
+        let w = $(".layui-card").width();
+        $("#graph1").css({
+            width: w * 0.9,
+            height: w * 0.8
+        });
+        $("#graph2").css({
+            width: w * 0.9,
+            height: w * 0.8
+        });
+
+        const myChart1 = echarts.init(document.getElementById('graph1'));
+        const option1 = {
+            title: {
+                text: '得分前十堆叠折线图'
+            },
+            tooltip: {
+                trigger: 'axis', //触发类型；轴触发（显示堆叠的所有数据）
+                textStyle: {
+                    fontSize: 20,
+                    // lineHeight: 25
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'right',
+                type: 'scroll', //可滚动翻页的图例
+                top: '4%',
+                textStyle: {
+                    fontSize: 20
+                },
+                data: [
+                    [[${player1.get(0).getName()}]],
+                    [[${player1.get(1).getName()}]],
+                    [[${player1.get(2).getName()}]],
+                    [[${player1.get(3).getName()}]],
+                    [[${player1.get(4).getName()}]],
+                    [[${player1.get(5).getName()}]],
+                    [[${player1.get(6).getName()}]],
+                    [[${player1.get(7).getName()}]],
+                    [[${player1.get(8).getName()}]],
+                    [[${player1.get(9).getName()}]]
+                ]
+            },
+            grid: {
+                left: '4%',
+                top: '8%',
+                containLabel: true //包含坐标轴的刻度标签
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: [
+                    {
+                        value: '得分',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                    {
+                        value: '篮板',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },                        {
+                        value: '助攻',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },                        {
+                        value: '抢断',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },                        {
+                        value: '盖帽',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                ]
+            },
+            yAxis: {
+                type: 'value',
+                data: [
+                    {
+                        value: '0',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                    {
+                        value: '10000',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                    {
+                        value: '20000',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                    {
+                        value: '30000',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    },
+                    {
+                        value: '40000',
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                ]
+            },
+            series: [
+                {
+                    name: [[${player1.get(0).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(0).getScore()}]],
+                        [[${player1.get(0).getRebound()}]],
+                        [[${player1.get(0).getAssist()}]],
+                        [[${player1.get(0).getSteal()}]],
+                        [[${player1.get(0).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(1).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(1).getScore()}]],
+                        [[${player1.get(1).getRebound()}]],
+                        [[${player1.get(1).getAssist()}]],
+                        [[${player1.get(1).getSteal()}]],
+                        [[${player1.get(1).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(2).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(2).getScore()}]],
+                        [[${player1.get(2).getRebound()}]],
+                        [[${player1.get(2).getAssist()}]],
+                        [[${player1.get(2).getSteal()}]],
+                        [[${player1.get(2).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(3).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(3).getScore()}]],
+                        [[${player1.get(3).getRebound()}]],
+                        [[${player1.get(3).getAssist()}]],
+                        [[${player1.get(3).getSteal()}]],
+                        [[${player1.get(3).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(4).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(4).getScore()}]],
+                        [[${player1.get(4).getRebound()}]],
+                        [[${player1.get(4).getAssist()}]],
+                        [[${player1.get(4).getSteal()}]],
+                        [[${player1.get(4).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(5).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(5).getScore()}]],
+                        [[${player1.get(5).getRebound()}]],
+                        [[${player1.get(5).getAssist()}]],
+                        [[${player1.get(5).getSteal()}]],
+                        [[${player1.get(5).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(6).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(6).getScore()}]],
+                        [[${player1.get(6).getRebound()}]],
+                        [[${player1.get(6).getAssist()}]],
+                        [[${player1.get(6).getSteal()}]],
+                        [[${player1.get(6).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(7).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(7).getScore()}]],
+                        [[${player1.get(7).getRebound()}]],
+                        [[${player1.get(7).getAssist()}]],
+                        [[${player1.get(7).getSteal()}]],
+                        [[${player1.get(7).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(8).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(8).getScore()}]],
+                        [[${player1.get(8).getRebound()}]],
+                        [[${player1.get(8).getAssist()}]],
+                        [[${player1.get(8).getSteal()}]],
+                        [[${player1.get(8).getBlock()}]]
+                    ]
+                },
+                {
+                    name: [[${player1.get(9).getName()}]],
+                    type: 'line',
+                    data: [
+                        [[${player1.get(9).getScore()}]],
+                        [[${player1.get(9).getRebound()}]],
+                        [[${player1.get(9).getAssist()}]],
+                        [[${player1.get(9).getSteal()}]],
+                        [[${player1.get(9).getBlock()}]]
+                    ]
+                },
+            ]
+        };
+        myChart1.setOption(option1);
+
+        const myChart2 = echarts.init(document.getElementById('graph2'));
+        const option2 = {
+            title: {
+                text: '打球时间分区人数图',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                extraCssText:'width:200px;height:60px;', //提示框样式
+                textStyle: {
+                    fontSize: 25, //提示框内字体大小
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                top: '8%',
+                textStyle: {
+                    fontSize: 20
+                }
+            },
+            series: [
+                {
+                    name: '打球时间',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: [[${num1.get(3)}]], name: '<10' },
+                        { value: [[${num1.get(0)}]], name: '10~15' },
+                        { value: [[${num1.get(1)}]], name: '16~20' },
+                        { value: [[${num1.get(2)}]], name: '>20' },
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        myChart2.setOption(option2);
+    })
+</script>
+</body>
+</html>

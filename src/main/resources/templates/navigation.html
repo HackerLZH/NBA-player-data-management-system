@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="导航页面"/>
+    <meta name="description" content="导航页面"/>
+
+    <title>导航页</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link th:href="@{/assets/metro/metro.css}" rel="stylesheet">
+    <link th:href="@{/assets/metro/metro-icons.css}" rel="stylesheet">
+    <style>
+        .tile-large {
+            opacity: 0; /*完全透明*/
+            /*transform 属性向元素应用 2D 或 3D 转换*/
+            transform: scale(.8); /*定义 2D 缩放转换*/
+            -webkit-transform: scale(.8); /*兼容谷歌*/
+        }
+
+        @media screen and (max-width: 640px) {
+            .tile-area {
+                overflow-y: scroll;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .tile-area {
+                overflow-y: scroll;
+            }
+        }
+    </style>
+    <script th:src="@{/assets/jquery/jquery.js}"></script>
+    <script th:src="@{/assets/metro/metro.js}"></script>
+    <script th:src="@{/assets/mine/js/navigation.js}"></script>
+</head>
+<body style="overflow-y: hidden; overflow-x: hidden;">
+
+<div class="tile-area tile-area-scheme-dark fg-white" style="height: 100%; max-height: 100% !important;">
+    <h1 class="tile-area-title">导航页面</h1>
+    <div class="tile-group double">
+        <span class="tile-group-title">个人</span>
+        <div class="tile-container">
+            <a id="userProfile" class="tile-large bg-gray fg-white" data-role="tile">
+                    <div class="tile-content iconic slide-left-2">
+                        <div class="slide">
+                            <span class="icon mif-profile"></span>
+                        </div>
+                        <div class="slide-over text-enlarged padding10">
+                            "在这里您可以查看和修改个人信息，还可以给站长留言"
+                        </div>
+                        <span class="tile-label">profile</span>
+                    </div>
+            </a>
+            <a th:if="${user.getEmail().equals('admin@admin.com')}" id="admin" class="tile-large" data-role="tile">
+                <div class="tile-content iconic slide-left-2">
+                    <!--滑动-->
+                    <div class="slide">
+                        <div class="image-container">
+                            <div class="frame">
+                                <img th:src="${user.getIcon()}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!--文字从上面滑下来-->
+                    <div class="slide-over text-enlarged padding10">
+                        "管理员可以添加、删除和修改球员信息，还可以查看用户留言"
+                    </div>
+                    <!--文字角标-->
+                    <div class="tile-label">admin</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="tile-group double">
+        <span class="tile-group-title">球员</span>
+        <div class="tile-container">
+            <a id='playerProfile' class="tile-large bg-pink fg-white" data-role="tile">
+                <div class="tile-content iconic slide-left-2">
+                    <div class="slide">
+                        <span class="icon mif-users"></span>
+                    </div>
+                    <div class="slide-over text-enlarged padding10">
+                        "在这里您可以查阅球员资料"
+                    </div>
+                    <span class="tile-label">球员资料</span>
+                </div>
+            </a>
+            <a id='playerGraph' class="tile-large bg-violet fg-white" data-role="tile">
+                <div class="tile-content iconic slide-left-2">
+                    <div class="slide">
+                        <span class="icon mif-chart-bars"></span>
+                    </div>
+                    <div class="slide-over text-enlarged padding10">
+                        "在这里您可以查阅球员数据图"
+                    </div>
+                    <span class="tile-label">数据图</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="tile-group double">
+        <span class="tile-group-title">赛事</span>
+        <div class="tile-container">
+            <a id='calendar' class="tile-large bg-green fg-white" data-role="tile">
+                <div class="tile-content iconic slide-left-2">
+                    <div class="slide">
+                        <span class="icon mif-calendar"></span>
+                    </div>
+                    <div class="slide-over text-enlarged padding10">
+                        "在这里您可以查询NBA近期赛程"
+                    </div>
+                    <span class="tile-label">NBA近期赛程</span>
+                </div>
+            </a>
+            <a id='news' class="tile-large bg-emerald fg-white" data-role="tile">
+                <div class="tile-content iconic slide-left-2">
+                    <div class="slide">
+                        <span class="icon mif-broadcast"></span>
+                    </div>
+                    <div class="slide-over text-enlarged padding10">
+                        "在这里您可以查询最新的NBA新闻"
+                    </div>
+                    <span class="tile-label">NBA每日新闻</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${project}+'的验证码邮件'"></title>
+    <style>
+        body {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #main {
+            text-align: center;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <h3>欢迎注册<span th:text="${project}"></span>，您的验证码是：</h3>
+    <h2 style="color: blueviolet;"><span th:text="${code}"></span></h2>
+    <h4 style="color: red">注意！！！此验证码有效期仅为3分钟！！！</h4>
+</div>
+</body>
+</html>

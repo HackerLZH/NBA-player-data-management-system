@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NBA数据管理系统</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/bootstrap.css}">
+    <style type="text/css">
+        .login-wrapper {
+            width: 100vw;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .login {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .slide-img {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .btn-mybg {
+            color: #fff;
+            background-color: #C0C0C0;
+            border: none;
+        }
+
+        .btn-mybg:hover {
+            color: #fff;
+            background-color: #696969;
+            border-color: #696969;
+        }
+
+        .error {
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+    <script th:src="@{/assets/jquery/jquery.js}"></script>
+    <script th:src="@{/assets/jquery/jquery.validate.js}"></script>
+    <script th:src="@{/assets/jquery/messages_zh.js}"></script>
+    <script th:src="@{/assets/bootstrap/bootstrap.js}"></script>
+    <script th:src="@{/assets/mine/js/user-login.js}"></script>
+</head>
+<body>
+<!--轮播开始-->
+<!--设置position-absolute或position-fixed使得背景位于登录表单下方-->
+<div id="mySlider" class="carousel slide h-100 position-fixed" data-ride="carousel">
+    <ol class="carousel-indicators position-fixed">
+        <li data-target="#mySlider" data-slide-to="0"></li>
+        <li data-target="#mySlider" data-slide-to="1" class="active"></li>
+        <li data-target="#mySlider" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="slide-img" th:src="@{/assets/images/1.jpg}"/>
+        </div>
+        <div class="carousel-item">
+            <img class="slide-img" th:src="@{/assets/images/2.jpg}"/>
+        </div>
+        <div class="carousel-item">
+            <img class="slide-img" th:src="@{/assets/images/3.jpg}"/>
+        </div>
+    </div>
+    <a class="carousel-control-prev position-fixed" href="#mySlider" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">上一个</span>
+    </a>
+    <a class="carousel-control-next position-fixed" href="#mySlider" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">下一个</span>
+    </a>
+</div>
+<!--轮播结束-->
+<!--表单开始 -->
+<div class="d-flex justify-content-center login-wrapper">
+    <div class="col-sm-8 col-md-6 col-xl-4 p-4 card align-self-center login">
+        <div class="card-header text-center bg-transparent">
+            <h4 class="mb-0">NBA数据管理系统(登录)</h4>
+        </div>
+        <div class="card-body">
+            <form id="loginForm" th:action="@{/user/doLogin}" method="post">
+                <div class="form-group text-left">
+                    <input type="text" class="form-control checkIfEmailRegistered" id="email" name="email" placeholder="邮箱" autocomplete="on" autofocus="autofocus">
+                </div>
+                <div class="form-group text-left">
+                    <input type="password" class="form-control checkIfPasswordMatched" id="password" name="password" placeholder="密码"
+                           autocomplete="on">
+                </div>
+                <div class="form-group form-check text-left">
+                    <a style="text-decoration:none;float:right; padding-bottom: 16px;" th:href="@{/user/register}">还未注册？</a>
+                </div>
+                <button id='loginBtn' type="button" class="btn btn-mybg btn-block">登&nbsp;&nbsp;录</button>
+                <div style="margin-top: 16px; display: none;" class="alert alert-info" role="alert">
+                    登录中...请稍等...
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

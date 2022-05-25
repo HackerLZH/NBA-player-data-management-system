@@ -1,0 +1,12 @@
+$RECYCLE.BIN
+System Volume Information
+
+# Intellij
+*.ipr
+*.iml
+*.iws
+.idea/
+
+# Java
+*.class
+target/

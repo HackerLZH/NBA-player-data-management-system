@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NBA新闻</title>
+    <link rel="stylesheet" th:href="@{/assets/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/mine/css/news.css}">
+    <script th:src="@{/assets/layui/layui.js}"></script>
+    <script th:src="@{/assets/mine/js/news.js}"></script>
+</head>
+<body>
+<div>
+    <div class="layui-main layui-card" style="width: 100%;border-radius: 10px;height: 50%">
+        <div style="text-align: center;" class="layui-card-header"><h1>NBA新闻</h1></div>
+        <div class="layui-card-body">
+            <div class="di">
+                <div class="d_left">
+                    <a id="return">《</a>
+                    <button id="returnTop">
+                        回到顶部
+                    </button>
+                </div>
+                <div class="d_center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

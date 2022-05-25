@@ -1,0 +1,157 @@
+{
+  "reason": "查询成功",
+  "result": {
+    "title": "美国职业篮球联赛",
+    "duration": "2021-2022",
+    "matchs": [
+      {
+        "date": "2022-04-14",
+        "week": "周四",
+        "list": [
+          {
+            "time_start": "07:00",
+            "status": "3",
+            "status_text": "完赛",
+            "team1": "夏洛特黄蜂",
+            "team2": "亚特兰大老鹰",
+            "team1_score": "103",
+            "team2_score": "132"
+          },
+          {
+            "time_start": "09:30",
+            "status": "3",
+            "status_text": "完赛",
+            "team1": "圣安东尼奥马刺",
+            "team2": "新奥尔良鹈鹕",
+            "team1_score": "103",
+            "team2_score": "113"
+          }
+        ]
+      },
+      {
+        "date": "2022-04-16",
+        "week": "周六",
+        "list": [
+          {
+            "time_start": "07:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "亚特兰大老鹰",
+            "team2": "克里夫兰骑士",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "10:00",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "新奥尔良鹈鹕",
+            "team2": "洛杉矶快船",
+            "team1_score": "-",
+            "team2_score": "-"
+          }
+        ]
+      },
+      {
+        "date": "2022-04-17",
+        "week": "周日",
+        "list": [
+          {
+            "time_start": "01:00",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "犹他爵士",
+            "team2": "达拉斯独行侠",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "03:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "明尼苏达森林狼",
+            "team2": "孟菲斯灰熊",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "06:00",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "多伦多猛龙",
+            "team2": "费城76人",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "08:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "丹佛掘金",
+            "team2": "金州勇士",
+            "team1_score": "-",
+            "team2_score": "-"
+          }
+        ]
+      },
+      {
+        "date": "2022-04-18",
+        "week": "周一",
+        "list": [
+          {
+            "time_start": "03:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "布鲁克林篮网",
+            "team2": "波士顿凯尔特人",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "06:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "芝加哥公牛",
+            "team2": "密尔沃基雄鹿",
+            "team1_score": "-",
+            "team2_score": "-"
+          }
+        ]
+      },
+      {
+        "date": "2022-04-19",
+        "week": "周二",
+        "list": [
+          {
+            "time_start": "07:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "多伦多猛龙",
+            "team2": "费城76人",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "08:30",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "犹他爵士",
+            "team2": "达拉斯独行侠",
+            "team1_score": "-",
+            "team2_score": "-"
+          },
+          {
+            "time_start": "10:00",
+            "status": "1",
+            "status_text": "未开赛",
+            "team1": "丹佛掘金",
+            "team2": "金州勇士",
+            "team1_score": "-",
+            "team2_score": "-"
+          }
+        ]
+      }
+    ]
+  },
+  "error_code": 0
+}
